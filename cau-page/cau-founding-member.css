@@ -1,12 +1,26 @@
 /* ═══════════════════════════════════════════════════════════════
-   CAU Founding Member Page — GBR Theme
+   CAU Founding Member Page — GBR Production CSS
    Task: 868m4yep5
-   Font: Rubik (Google Fonts)
-   Primary: #E13A28 | Dark: #1B1B20 | Body: #343434
+   
+   SCOPED: All rules are namespaced under .cau-page to prevent
+   conflicts with the review_books_child Bootstrap theme.
+   
+   ENQUEUE via functions.php (conditionally on this template only):
+     wp_enqueue_style(
+       'cau-founding-member',
+       get_stylesheet_directory_uri() . '/assets/css/cau-founding-member.css',
+       [], '1.0.0'
+     );
+   
+   Colors:  #E13A28 red | #1B1B20 dark | #343434 body
+   Font:    Rubik (already loaded by WP theme — no Google Fonts import needed)
    ═══════════════════════════════════════════════════════════════ */
 
-/* ── BRAND TOKENS ── */
-:root {
+/* ── BRAND TOKENS ──
+   Defined here so this file is self-contained.
+   Scoped under .cau-page to avoid polluting global :root.
+   ─────────────────────────────────────────────────────────────── */
+.cau-page {
   --gbr-red:        #E13A28;
   --gbr-red-dark:   #D93220;
   --gbr-red-hover:  #C42E1E;
@@ -22,137 +36,122 @@
   --gbr-border-alt: #E2E2E4;
   --gbr-green:      #28A745;
   --gbr-link:       #2981DA;
-  --font:           'Rubik', -apple-system, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  --cau-font:       'Rubik', -apple-system, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
 }
 
-/* ── RESET & BASE ── */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  font-family: var(--font);
-  background: var(--gbr-bg-light);
-  color: var(--gbr-body);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* ── TYPOGRAPHY ── */
-h1, h2, h3, h4 {
-  font-family: var(--font);
-  color: var(--gbr-dark);
-  line-height: 1.2;
-}
-
-p {
-  line-height: 1.75;
-}
-
-a {
-  color: var(--gbr-link);
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-/* ── CONTAINERS ── */
+/* ── PAGE WRAPPER ── */
 .cau-page {
   max-width: 1040px;
   margin: 0 auto;
   background: var(--gbr-bg-white);
   box-shadow: 0 2px 32px rgba(0, 0, 0, 0.09);
   overflow: hidden;
+  font-family: var(--cau-font);
+  color: var(--gbr-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.section-inner {
-  max-width: 760px;
-  margin: 0 auto;
+/* ── SCOPED BOX-SIZING (won't override Bootstrap globally) ── */
+.cau-page *,
+.cau-page *::before,
+.cau-page *::after {
+  box-sizing: border-box;
+}
+
+/* ── SCOPED TYPOGRAPHY ── */
+.cau-page h1,
+.cau-page h2,
+.cau-page h3,
+.cau-page h4 {
+  font-family: var(--cau-font);
+  color: var(--gbr-dark);
+  line-height: 1.2;
+  margin: 0;
+}
+
+.cau-page p {
+  line-height: 1.75;
+  margin: 0;
+}
+
+.cau-page a {
+  color: var(--gbr-link);
+  text-decoration: none;
+}
+
+.cau-page a:hover {
+  text-decoration: underline;
 }
 
 /* ── BUTTONS ── */
-.btn-primary {
+.cau-btn-primary {
   display: inline-block;
   background: var(--gbr-red);
-  color: #fff;
-  font-family: var(--font);
+  color: #fff !important;
+  font-family: var(--cau-font);
   font-size: 15px;
   font-weight: 700;
   padding: 14px 32px;
   border-radius: 4px;
   border: none;
   cursor: pointer;
-  text-decoration: none;
+  text-decoration: none !important;
   transition: background 0.2s ease;
   line-height: 1;
 }
 
-.btn-primary:hover {
+.cau-btn-primary:hover {
   background: var(--gbr-red-hover);
-  text-decoration: none;
-  color: #fff;
 }
 
-.btn-ghost-light {
+.cau-btn-ghost-light {
   display: inline-block;
   border: 1.5px solid rgba(255, 255, 255, 0.35);
-  color: rgba(255, 255, 255, 0.80);
-  font-family: var(--font);
+  color: rgba(255, 255, 255, 0.80) !important;
+  font-family: var(--cau-font);
   font-size: 14px;
   font-weight: 500;
   padding: 12px 28px;
   border-radius: 4px;
-  text-decoration: none;
+  text-decoration: none !important;
   cursor: pointer;
   transition: border-color 0.2s ease, color 0.2s ease;
   line-height: 1;
 }
 
-.btn-ghost-light:hover {
+.cau-btn-ghost-light:hover {
   border-color: rgba(255, 255, 255, 0.65);
-  color: #fff;
-  text-decoration: none;
+  color: #fff !important;
 }
 
-.btn-dark {
+.cau-btn-dark {
   display: inline-block;
   background: var(--gbr-dark);
-  color: #fff;
-  font-family: var(--font);
+  color: #fff !important;
+  font-family: var(--cau-font);
   font-size: 15px;
   font-weight: 700;
   padding: 14px 32px;
   border-radius: 4px;
   border: none;
   cursor: pointer;
-  text-decoration: none;
+  text-decoration: none !important;
   transition: background 0.2s ease;
   line-height: 1;
 }
 
-.btn-dark:hover {
+.cau-btn-dark:hover {
   background: #000;
-  text-decoration: none;
-  color: #fff;
 }
 
-.btn-outline {
+.cau-btn-outline {
   display: block;
   width: 100%;
   text-align: center;
   background: transparent;
-  color: var(--gbr-body);
-  font-family: var(--font);
+  color: var(--gbr-body) !important;
+  font-family: var(--cau-font);
   font-size: 13px;
   font-weight: 700;
   padding: 11px 16px;
@@ -160,21 +159,21 @@ a:hover {
   border: 1.5px solid var(--gbr-border);
   cursor: pointer;
   transition: border-color 0.2s ease, color 0.2s ease;
+  text-decoration: none !important;
 }
 
-.btn-outline:hover {
+.cau-btn-outline:hover {
   border-color: var(--gbr-red);
-  color: var(--gbr-red);
-  text-decoration: none;
+  color: var(--gbr-red) !important;
 }
 
-.btn-plan-primary {
+.cau-btn-plan-primary {
   display: block;
   width: 100%;
   text-align: center;
   background: var(--gbr-red);
-  color: #fff;
-  font-family: var(--font);
+  color: #fff !important;
+  font-family: var(--cau-font);
   font-size: 13px;
   font-weight: 700;
   padding: 11px 16px;
@@ -182,99 +181,24 @@ a:hover {
   border: none;
   cursor: pointer;
   transition: background 0.2s ease;
+  text-decoration: none !important;
 }
 
-.btn-plan-primary:hover {
-  background: var(--gbr-red-hover);
-  text-decoration: none;
-  color: #fff;
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   SITE NAVIGATION
-   ═══════════════════════════════════════════════════════════════ */
-.gbr-nav {
-  background: var(--gbr-dark);
-  padding: 14px 44px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.gbr-nav__logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-}
-
-.gbr-nav__logo-icon {
-  width: 38px;
-  height: 38px;
-  border-radius: 6px;
-  background: var(--gbr-red);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  color: #fff;
-  flex-shrink: 0;
-}
-
-.gbr-nav__logo-text {
-  color: #fff;
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: -0.3px;
-}
-
-.gbr-nav__logo-text span {
-  color: var(--gbr-red);
-}
-
-.gbr-nav__links {
-  display: flex;
-  align-items: center;
-  gap: 26px;
-  list-style: none;
-}
-
-.gbr-nav__links a {
-  color: rgba(255, 255, 255, 0.72);
-  font-size: 13px;
-  font-weight: 400;
-  transition: color 0.2s;
-}
-
-.gbr-nav__links a:hover {
-  color: #fff;
-  text-decoration: none;
-}
-
-.gbr-nav__links .nav-btn {
-  background: var(--gbr-red);
-  color: #fff;
-  padding: 8px 18px;
-  border-radius: 4px;
-  font-weight: 600;
-  font-size: 13px;
-}
-
-.gbr-nav__links .nav-btn:hover {
+.cau-btn-plan-primary:hover {
   background: var(--gbr-red-hover);
 }
 
 /* ═══════════════════════════════════════════════════════════════
    S1 — HERO
    ═══════════════════════════════════════════════════════════════ */
-.hero {
+.cau-hero {
   background: var(--gbr-dark);
   padding: 70px 52px 60px;
   text-align: center;
   color: #fff;
 }
 
-.hero__eyebrow {
+.cau-hero__eyebrow {
   display: inline-block;
   border: 1px solid rgba(225, 58, 40, 0.55);
   background: rgba(225, 58, 40, 0.10);
@@ -288,7 +212,7 @@ a:hover {
   margin-bottom: 24px;
 }
 
-.hero__h1 {
+.cau-hero__h1 {
   font-size: 40px;
   font-weight: 800;
   line-height: 1.14;
@@ -299,12 +223,12 @@ a:hover {
   color: #fff;
 }
 
-.hero__h1 em {
+.cau-hero__h1 em {
   color: var(--gbr-red);
   font-style: normal;
 }
 
-.hero__sub {
+.cau-hero__sub {
   font-size: 16px;
   color: rgba(255, 255, 255, 0.70);
   margin-bottom: 32px;
@@ -314,7 +238,7 @@ a:hover {
   line-height: 1.70;
 }
 
-.hero__quote {
+.cau-hero__quote {
   max-width: 600px;
   margin: 0 auto 36px;
   text-align: left;
@@ -328,7 +252,7 @@ a:hover {
   font-style: italic;
 }
 
-.hero__cta-row {
+.cau-hero__cta-row {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -336,7 +260,7 @@ a:hover {
   flex-wrap: wrap;
 }
 
-.hero__fine {
+.cau-hero__fine {
   font-size: 11px;
   color: rgba(255, 255, 255, 0.35);
   margin-top: 14px;
@@ -345,45 +269,53 @@ a:hover {
 /* ═══════════════════════════════════════════════════════════════
    S2 — THE HONEST STORY
    ═══════════════════════════════════════════════════════════════ */
-.story {
+.cau-story {
   background: var(--gbr-bg-white);
   padding: 56px 52px;
   border-bottom: 1px solid var(--gbr-border);
 }
 
-.section-heading {
+.cau-section-heading {
   font-size: 28px;
   font-weight: 800;
   margin-bottom: 10px;
   color: var(--gbr-dark);
 }
 
-.section-sub {
+.cau-section-heading--center {
+  text-align: center;
+}
+
+.cau-section-sub {
   font-size: 14px;
   color: var(--gbr-muted);
   margin-bottom: 30px;
 }
 
-.story__body p {
+.cau-section-sub--center {
+  text-align: center;
+}
+
+.cau-story__body p {
   font-size: 15px;
   color: var(--gbr-body);
   margin-bottom: 16px;
   max-width: 700px;
 }
 
-.story__body p strong {
+.cau-story__body p strong {
   color: var(--gbr-dark);
   font-weight: 700;
 }
 
-.story__cards {
+.cau-story__cards {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
   margin-top: 36px;
 }
 
-.story__card {
+.cau-story__card {
   background: var(--gbr-bg-light);
   border: 1px solid var(--gbr-border);
   border-radius: 6px;
@@ -392,16 +324,16 @@ a:hover {
   transition: border-color 0.2s ease;
 }
 
-.story__card:hover {
+.cau-story__card:hover {
   border-color: var(--gbr-red);
 }
 
-.story__card-icon {
+.cau-story__card-icon {
   font-size: 28px;
   margin-bottom: 10px;
 }
 
-.story__card-label {
+.cau-story__card-label {
   font-size: 12px;
   font-weight: 600;
   color: var(--gbr-dark);
@@ -411,27 +343,27 @@ a:hover {
 /* ═══════════════════════════════════════════════════════════════
    S3 — FEATURES
    ═══════════════════════════════════════════════════════════════ */
-.features {
+.cau-features {
   background: var(--gbr-bg-light);
   padding: 56px 52px;
   border-bottom: 1px solid var(--gbr-border);
 }
 
-.features__grid {
+.cau-features__grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 22px;
   margin-top: 32px;
 }
 
-.features__col {
+.cau-features__col {
   background: var(--gbr-bg-white);
   border: 1px solid var(--gbr-border);
   border-radius: 6px;
   padding: 28px 26px;
 }
 
-.features__col-heading {
+.cau-features__col-heading {
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.9px;
@@ -442,7 +374,7 @@ a:hover {
   border-bottom: 1px solid var(--gbr-border);
 }
 
-.features__item {
+.cau-features__item {
   display: flex;
   align-items: flex-start;
   gap: 10px;
@@ -452,13 +384,13 @@ a:hover {
   line-height: 1.5;
 }
 
-.features__item-icon {
+.cau-features__item-icon {
   flex-shrink: 0;
   font-size: 14px;
   margin-top: 1px;
 }
 
-.features__note {
+.cau-features__note {
   font-size: 12px;
   color: var(--gbr-light-text);
   margin-top: 20px;
@@ -470,13 +402,13 @@ a:hover {
 /* ═══════════════════════════════════════════════════════════════
    S4 — PRICING
    ═══════════════════════════════════════════════════════════════ */
-.pricing {
+.cau-pricing {
   background: var(--gbr-bg-white);
   padding: 56px 52px;
   border-bottom: 1px solid var(--gbr-border);
 }
 
-.pricing__grid {
+.cau-pricing__grid {
   display: grid;
   grid-template-columns: 1fr 1.1fr 1fr;
   gap: 20px;
@@ -484,7 +416,7 @@ a:hover {
   align-items: start;
 }
 
-.pricing__card {
+.cau-pricing__card {
   border: 1.5px solid var(--gbr-border);
   border-radius: 6px;
   padding: 30px 24px;
@@ -493,12 +425,12 @@ a:hover {
   transition: box-shadow 0.2s ease;
 }
 
-.pricing__card--featured {
+.cau-pricing__card--featured {
   border-color: var(--gbr-red);
   box-shadow: 0 0 0 3px rgba(225, 58, 40, 0.11);
 }
 
-.pricing__badge {
+.cau-pricing__badge {
   position: absolute;
   top: -14px;
   left: 50%;
@@ -514,7 +446,7 @@ a:hover {
   text-transform: uppercase;
 }
 
-.pricing__plan-name {
+.cau-pricing__plan-name {
   font-size: 11px;
   font-weight: 700;
   color: var(--gbr-muted);
@@ -523,7 +455,7 @@ a:hover {
   margin-bottom: 12px;
 }
 
-.pricing__amount {
+.cau-pricing__amount {
   font-size: 38px;
   font-weight: 900;
   color: var(--gbr-dark);
@@ -531,19 +463,24 @@ a:hover {
   line-height: 1;
 }
 
-.pricing__amount sup {
+.cau-pricing__amount--sm {
+  font-size: 22px;
+  padding-top: 8px;
+}
+
+.cau-pricing__amount sup {
   font-size: 20px;
   vertical-align: super;
   font-weight: 700;
 }
 
-.pricing__amount .period {
+.cau-period {
   font-size: 14px;
   font-weight: 400;
   color: var(--gbr-muted);
 }
 
-.pricing__was {
+.cau-pricing__was {
   font-size: 12px;
   color: var(--gbr-muted);
   text-decoration: line-through;
@@ -551,12 +488,13 @@ a:hover {
   min-height: 18px;
 }
 
-.pricing__list {
+.cau-pricing__list {
   list-style: none;
-  margin-bottom: 24px;
+  padding: 0;
+  margin: 0 0 24px 0;
 }
 
-.pricing__list li {
+.cau-pricing__list li {
   font-size: 13px;
   color: var(--gbr-body);
   margin-bottom: 9px;
@@ -566,18 +504,18 @@ a:hover {
   line-height: 1.45;
 }
 
-.pricing__list li.dim {
+.cau-pricing__list li.cau-dim {
   color: #b0b0b0;
 }
 
-.pricing__fine {
+.cau-pricing__fine {
   font-size: 11px;
   color: var(--gbr-muted);
   text-align: center;
   margin-top: 10px;
 }
 
-.pricing__tbd {
+.cau-pricing__tbd {
   display: inline-block;
   background: var(--gbr-bg-light);
   border: 1px dashed var(--gbr-border);
@@ -589,7 +527,7 @@ a:hover {
   margin-top: 4px;
 }
 
-.pricing__disclaimer {
+.cau-pricing__disclaimer {
   text-align: center;
   font-size: 11.5px;
   color: var(--gbr-light-text);
@@ -599,27 +537,27 @@ a:hover {
 /* ═══════════════════════════════════════════════════════════════
    S5 — HOW IT WORKS
    ═══════════════════════════════════════════════════════════════ */
-.how {
+.cau-how {
   background: var(--gbr-bg-light);
   padding: 56px 52px;
   border-bottom: 1px solid var(--gbr-border);
 }
 
-.how__steps {
+.cau-how__steps {
   display: flex;
   gap: 0;
   margin-top: 40px;
   position: relative;
 }
 
-.how__step {
+.cau-how__step {
   flex: 1;
   text-align: center;
   padding: 0 18px;
   position: relative;
 }
 
-.how__step:not(:last-child)::after {
+.cau-how__step:not(:last-child)::after {
   content: '';
   position: absolute;
   top: 21px;
@@ -630,7 +568,7 @@ a:hover {
   z-index: 0;
 }
 
-.how__step-num {
+.cau-how__step-num {
   width: 44px;
   height: 44px;
   border-radius: 50%;
@@ -648,14 +586,14 @@ a:hover {
   box-shadow: 0 0 0 2px var(--gbr-red);
 }
 
-.how__step h3 {
+.cau-how__step h3 {
   font-size: 14px;
   font-weight: 700;
   color: var(--gbr-dark);
   margin-bottom: 8px;
 }
 
-.how__step p {
+.cau-how__step p {
   font-size: 13px;
   color: var(--gbr-muted);
   line-height: 1.60;
@@ -664,7 +602,7 @@ a:hover {
 /* ═══════════════════════════════════════════════════════════════
    S6 — BEN'S NOTE
    ═══════════════════════════════════════════════════════════════ */
-.ben-note {
+.cau-ben-note {
   background: var(--gbr-dark);
   padding: 56px 52px;
   display: flex;
@@ -673,7 +611,7 @@ a:hover {
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.ben-note__avatar {
+.cau-ben-note__avatar {
   flex-shrink: 0;
   width: 80px;
   height: 80px;
@@ -686,7 +624,7 @@ a:hover {
   font-size: 30px;
 }
 
-.ben-note__label {
+.cau-ben-note__label {
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
@@ -695,7 +633,7 @@ a:hover {
   margin-bottom: 18px;
 }
 
-.ben-note__quote {
+.cau-ben-note__quote {
   font-size: 15px;
   line-height: 1.82;
   color: rgba(255, 255, 255, 0.80);
@@ -705,7 +643,7 @@ a:hover {
   margin-bottom: 18px;
 }
 
-.ben-note__sig {
+.cau-ben-note__sig {
   font-size: 13px;
   color: rgba(255, 255, 255, 0.40);
 }
@@ -713,20 +651,20 @@ a:hover {
 /* ═══════════════════════════════════════════════════════════════
    S7 — FAQ
    ═══════════════════════════════════════════════════════════════ */
-.faq {
+.cau-faq {
   background: var(--gbr-bg-white);
   padding: 56px 52px;
   border-bottom: 1px solid var(--gbr-border);
 }
 
-.faq__grid {
+.cau-faq__grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 18px;
   margin-top: 32px;
 }
 
-.faq__item {
+.cau-faq__item {
   background: var(--gbr-bg-light);
   border: 1px solid var(--gbr-border);
   border-radius: 6px;
@@ -734,11 +672,11 @@ a:hover {
   transition: border-color 0.2s ease;
 }
 
-.faq__item:hover {
+.cau-faq__item:hover {
   border-color: var(--gbr-red);
 }
 
-.faq__question {
+.cau-faq__question {
   font-size: 13.5px;
   font-weight: 700;
   color: var(--gbr-dark);
@@ -746,7 +684,7 @@ a:hover {
   line-height: 1.4;
 }
 
-.faq__answer {
+.cau-faq__answer {
   font-size: 13px;
   color: var(--gbr-body);
   line-height: 1.70;
@@ -755,20 +693,20 @@ a:hover {
 /* ═══════════════════════════════════════════════════════════════
    S8 — FINAL CTA
    ═══════════════════════════════════════════════════════════════ */
-.final-cta {
+.cau-final-cta {
   background: var(--gbr-red);
   padding: 60px 52px;
   text-align: center;
 }
 
-.final-cta h2 {
+.cau-final-cta h2 {
   font-size: 32px;
   font-weight: 800;
   color: #fff;
   margin-bottom: 12px;
 }
 
-.final-cta p {
+.cau-final-cta p {
   font-size: 16px;
   color: rgba(255, 255, 255, 0.80);
   margin-bottom: 34px;
@@ -778,137 +716,101 @@ a:hover {
   line-height: 1.70;
 }
 
-.final-cta__link {
+.cau-final-cta__link {
   display: block;
   margin-top: 16px;
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(255, 255, 255, 0.65) !important;
   cursor: pointer;
-  text-decoration: underline;
+  text-decoration: underline !important;
   text-underline-offset: 2px;
 }
 
-.final-cta__link:hover {
-  color: #fff;
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   FOOTER
-   ═══════════════════════════════════════════════════════════════ */
-.gbr-footer {
-  background: var(--gbr-dark);
-  padding: 20px 52px;
-  text-align: center;
-  font-size: 11.5px;
-  color: rgba(255, 255, 255, 0.28);
-}
-
-.gbr-footer a {
-  color: rgba(255, 255, 255, 0.28);
-  text-decoration: none;
-}
-
-.gbr-footer a:hover {
-  color: rgba(255, 255, 255, 0.60);
-}
-
-.gbr-footer__sep {
-  margin: 0 10px;
+.cau-final-cta__link:hover {
+  color: #fff !important;
 }
 
 /* ═══════════════════════════════════════════════════════════════
    RESPONSIVE
    ═══════════════════════════════════════════════════════════════ */
 @media (max-width: 768px) {
-  .gbr-nav {
-    padding: 14px 20px;
-  }
-
-  .gbr-nav__links {
-    display: none;
-  }
-
-  .hero {
+  .cau-hero {
     padding: 48px 24px 44px;
   }
 
-  .hero__h1 {
+  .cau-hero__h1 {
     font-size: 28px;
   }
 
-  .hero__cta-row {
+  .cau-hero__cta-row {
     flex-direction: column;
     align-items: stretch;
   }
 
-  .hero__cta-row .btn-primary,
-  .hero__cta-row .btn-ghost-light {
+  .cau-hero__cta-row .cau-btn-primary,
+  .cau-hero__cta-row .cau-btn-ghost-light {
     width: 100%;
     text-align: center;
   }
 
-  .story,
-  .features,
-  .pricing,
-  .how,
-  .faq {
+  .cau-story,
+  .cau-features,
+  .cau-pricing,
+  .cau-how,
+  .cau-faq {
     padding: 40px 24px;
   }
 
-  .ben-note {
+  .cau-ben-note {
     padding: 40px 24px;
     flex-direction: column;
     gap: 24px;
   }
 
-  .final-cta {
+  .cau-final-cta {
     padding: 48px 24px;
   }
 
-  .story__cards {
+  .cau-story__cards {
     grid-template-columns: 1fr 1fr;
   }
 
-  .features__grid {
+  .cau-features__grid {
     grid-template-columns: 1fr;
   }
 
-  .pricing__grid {
+  .cau-pricing__grid {
     grid-template-columns: 1fr;
   }
 
-  .how__steps {
+  .cau-how__steps {
     flex-direction: column;
     gap: 32px;
   }
 
-  .how__step::after {
+  .cau-how__step::after {
     display: none;
   }
 
-  .faq__grid {
+  .cau-faq__grid {
     grid-template-columns: 1fr;
-  }
-
-  .gbr-footer {
-    padding: 20px 24px;
   }
 }
 
 @media (max-width: 480px) {
-  .story__cards {
+  .cau-story__cards {
     grid-template-columns: 1fr;
   }
 
-  .hero__h1 {
+  .cau-hero__h1 {
     font-size: 24px;
   }
 
-  .section-heading {
+  .cau-section-heading {
     font-size: 22px;
   }
 
-  .final-cta h2 {
+  .cau-final-cta h2 {
     font-size: 24px;
   }
 }
